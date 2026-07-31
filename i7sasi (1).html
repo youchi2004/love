@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فـ عينيكِ لقيت بحوري</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7EEE2;
+    --wine:#5C1A2E;
+    --wine-deep:#3A0F1E;
+    --ink:#2A1015;
+    --rosegold:#C98B6B;
+    --blush:#EAD1C6;
+    --gold-line: rgba(201,139,107,0.5);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Tajawal', sans-serif;
+    overflow-x:hidden;
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:6vh 6vw 18vh;
+    background:radial-gradient(ellipse at 50% 20%, var(--wine) 0%, var(--wine-deep) 65%, #24070f 100%);
+    overflow:hidden;
+  }
+
+  .eyebrow{
+    color:var(--blush);
+    font-family:'Tajawal', sans-serif;
+    font-weight:400;
+    font-size:clamp(14px,2.2vw,17px);
+    letter-spacing:1px;
+    opacity:.85;
+    margin-bottom:22px;
+  }
+
+  .hero h1{
+    font-family:'Tajawal', sans-serif;
+    font-weight:700;
+    color:#fbeee2;
+    font-size:clamp(34px, 7vw, 74px);
+    line-height:1.35;
+    text-shadow:0 2px 30px rgba(201,139,107,.35);
+    max-width:14ch;
+  }
+
+  .hero .spark{
+    display:inline-block;
+    color:var(--rosegold);
+  }
+
+  .hero p.sub{
+    margin-top:26px;
+    color:var(--blush);
+    font-weight:300;
+    font-size:clamp(14px,2.2vw,18px);
+    max-width:32ch;
+    line-height:1.9;
+    opacity:.9;
+  }
+
+  /* floating petals/eyes */
+  .petal{
+    position:absolute;
+    bottom:-40px;
+    font-size:18px;
+    opacity:0;
+    animation:rise linear infinite;
+    filter:drop-shadow(0 0 6px rgba(201,139,107,.4));
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) rotate(0deg); opacity:0;}
+    10%{opacity:.9;}
+    90%{opacity:.6;}
+    100%{transform:translateY(-115vh) rotate(340deg); opacity:0;}
+  }
+
+  /* ocean wave divider */
+  .wave-wrap{
+    position:absolute;
+    bottom:0; left:0; width:100%;
+    line-height:0;
+  }
+  .wave-wrap svg{width:100%;height:auto;display:block;}
+  .wave-line{position:absolute; bottom:0; left:0; width:100%; height:auto; animation:drift 12s ease-in-out infinite; z-index:2;}
+  .wave-a{animation:drift 16s ease-in-out infinite reverse;}
+  @keyframes drift{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(-1.5%);}
+  }
+
+  /* ================= POEM ================= */
+  .poem-section{
+    padding:14vh 6vw 12vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8vh;
+  }
+
+  .poem-card{
+    position:relative;
+    max-width:640px;
+    width:100%;
+    text-align:center;
+    padding:8vh 5vw;
+    border:1px solid var(--gold-line);
+    border-radius:2px;
+  }
+
+  .poem-card::before,
+  .poem-card::after{
+    content:"";
+    position:absolute;
+    width:34px;height:34px;
+    border:1px solid var(--rosegold);
+    opacity:.8;
+  }
+  .poem-card::before{top:-1px; right:-1px; border-left:none; border-bottom:none;}
+  .poem-card::after{bottom:-1px; left:-1px; border-right:none; border-top:none;}
+
+  .rose-icon{
+    font-size:28px;
+    display:inline-block;
+    margin-bottom:22px;
+    transition:transform .5s ease, filter .5s ease;
+  }
+  .poem-card:hover .rose-icon{
+    transform:scale(1.25) rotate(-6deg);
+    filter:drop-shadow(0 0 12px rgba(201,139,107,.6));
+  }
+
+  .poem-card h2{
+    font-family:'Tajawal', sans-serif;
+    font-weight:700;
+    color:var(--wine);
+    font-size:clamp(22px,3.4vw,30px);
+    margin-bottom:34px;
+  }
+
+  .poem-card .verse{
+    font-family:'Tajawal', sans-serif;
+    font-weight:300;
+    font-size:clamp(16px,2.4vw,19px);
+    line-height:2.6;
+    color:var(--ink);
+  }
+
+  .poem-card .verse strong{
+    font-weight:500;
+    color:var(--wine);
+  }
+
+  .divider-line{
+    width:60px;height:1px;
+    background:var(--rosegold);
+    margin:34px auto;
+    opacity:.7;
+  }
+
+  /* ================= EYE INTERACTION ================= */
+  .eye-section{
+    padding:6vh 6vw 12vh;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6vh 4vw;
+  }
+
+  .eye-box{
+    position:relative;
+    text-align:center;
+    cursor:pointer;
+    padding:20px 40px;
+  }
+
+  .eye-icon{
+    font-size:46px;
+    display:inline-block;
+    transition:transform .4s ease, filter .4s ease;
+    filter:grayscale(20%);
+  }
+
+  .eye-hint{
+    margin-top:8px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:13px;
+    letter-spacing:2px;
+    color:var(--rosegold);
+    opacity:.7;
+  }
+
+  .eye-poem{
+    direction:ltr;
+    text-align:left;
+    max-width:420px;
+    margin:24px auto 0;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:17px;
+    line-height:1.9;
+    color:var(--ink);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity .6s ease, max-height .8s ease;
+  }
+
+  .eye-box:hover .eye-icon{
+    transform:scale(1.15);
+    filter:grayscale(0%);
+  }
+  .eye-box:hover .eye-hint{
+    opacity:0;
+  }
+  .eye-box:hover .eye-poem{
+    opacity:1;
+    max-height:520px;
+  }
+
+  /* ================= ROSE GARDEN ================= */
+  .rose-garden{
+    padding:4vh 6vw 10vh;
+    text-align:center;
+  }
+
+  .garden-title{
+    font-family:'Tajawal', sans-serif;
+    font-weight:700;
+    color:var(--wine);
+    font-size:clamp(20px,3vw,26px);
+    margin-bottom:6vh;
+  }
+
+  .rose-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px 8px;
+    max-width:820px;
+    margin:0 auto;
+  }
+
+  .rose-item{
+    width:230px;
+    padding:22px 18px;
+    text-align:center;
+    cursor:pointer;
+  }
+
+  .r-icon{
+    font-size:30px;
+    display:inline-block;
+    transition:transform .4s ease, filter .4s ease;
+    filter:grayscale(25%) opacity(.8);
+  }
+
+  .rose-item:hover .r-icon{
+    transform:scale(1.18);
+    filter:grayscale(0%) opacity(1);
+  }
+
+  .r-poem{
+    direction:rtl;
+    font-family:'Tajawal', sans-serif;
+    font-weight:300;
+    font-size:14px;
+    line-height:1.9;
+    color:var(--ink);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    margin-top:0;
+    transition:opacity .6s ease, max-height .8s ease, margin-top .6s ease;
+  }
+
+  .rose-item:hover .r-poem{
+    opacity:1;
+    max-height:160px;
+    margin-top:14px;
+  }
+
+  /* ================= CLOSING ================= */
+  .closing{
+    padding:10vh 6vw 16vh;
+    text-align:center;
+    background:linear-gradient(180deg, var(--cream) 0%, var(--blush) 100%);
+  }
+
+  .closing .to{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--wine);
+    font-size:clamp(16px,2.4vw,20px);
+    letter-spacing:1px;
+    margin-bottom:10px;
+  }
+
+  .closing .name-slot{
+    font-family:'Tajawal', sans-serif;
+    font-weight:700;
+    font-size:clamp(26px,4vw,38px);
+    color:var(--wine-deep);
+    border-bottom:1px dashed var(--rosegold);
+    display:inline-block;
+    padding:0 10px 6px;
+  }
+
+  .closing .signature{
+    margin-top:36px;
+    font-size:22px;
+    letter-spacing:6px;
+    color:var(--rosegold);
+  }
+
+  .name-box{
+    cursor:pointer;
+    padding:10px 20px;
+  }
+
+  .name-hint{
+    margin-top:4px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:12px;
+    letter-spacing:2px;
+    color:var(--rosegold);
+    opacity:.7;
+  }
+
+  .name-poem{
+    direction:rtl;
+    max-width:420px;
+    margin:0 auto;
+    font-family:'Tajawal', sans-serif;
+    font-weight:300;
+    font-size:15px;
+    line-height:2.1;
+    color:var(--wine-deep);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity .6s ease, max-height .8s ease;
+  }
+
+  .name-box:hover .name-hint{opacity:0;}
+  .name-box:hover .name-poem{opacity:1; max-height:220px; margin-top:18px;}
+
+  @media (max-width:480px){
+    .poem-card{padding:7vh 7vw;}
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="eyebrow">لعزيزتي إكرام 💌</div>
+
+    <!-- floating petals -->
+    <div class="petal" style="right:8%; animation-duration:11s; animation-delay:0s;">🫧</div>
+    <div class="petal" style="right:22%; animation-duration:15s; animation-delay:2s; font-size:13px;">✨</div>
+    <div class="petal" style="right:38%; animation-duration:13s; animation-delay:5s;">🫧</div>
+    <div class="petal" style="right:55%; animation-duration:17s; animation-delay:1s; font-size:14px;">💫</div>
+    <div class="petal" style="right:70%; animation-duration:12s; animation-delay:4s;">🫧</div>
+    <div class="petal" style="right:85%; animation-duration:16s; animation-delay:3s; font-size:13px;">✨</div>
+
+    <div class="wave-wrap">
+      <svg class="wave-line" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,70 C160,20 320,110 480,60 C640,10 800,100 960,55 C1120,15 1280,95 1440,50"
+              fill="none" stroke="#C98B6B" stroke-width="1.4" opacity="0.55"/>
+      </svg>
+      <svg class="wave-a" viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path fill="#F7EEE2" d="M0,90 C200,120 340,60 500,78 C680,98 820,50 1000,66 C1160,80 1300,48 1440,68 L1440,130 L0,130 Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="eye-section">
+    <div class="eye-box">
+      <span class="eye-icon">👁️</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          Your eyes are the ocean I never meant to enter,<br>
+          but I did, and I stopped looking for the shore.<br>
+          Every time you look at me, I feel found,<br>
+          like something in me finally makes sense.<br>
+          I didn't plan to fall this deep,<br>
+          I just followed your eyes and forgot how to swim back.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">🌹</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          I keep trying to find the right words for you,<br>
+          and every time I think I'm close, you do something<br>
+          that makes me start all over again.<br>
+          Maybe that's the point. Maybe you're not something<br>
+          I'm supposed to finish writing about,<br>
+          you're something I keep discovering, page after page,<br>
+          a little more each time, and somehow it never runs out.<br>
+          I used to think love was a feeling.<br>
+          Now I think it's a habit, the habit of choosing someone<br>
+          over and over, quietly, without needing a reason,<br>
+          and I've chosen you more times than I can count.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">💌</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          If you ever doubt where you stand with me,<br>
+          read this again. You're not a maybe, you're not<br>
+          a someday, you're the answer I stopped searching for.<br>
+          I don't need grand gestures to prove it,<br>
+          I just need ordinary days with you in them,<br>
+          because somehow those turned out to be<br>
+          the best days I've ever had.<br>
+          So here it is, in writing, so you never have to wonder:<br>
+          I'm not going anywhere, and I'm glad it's you.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">🌙</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          Some nights I catch myself staring at nothing,<br>
+          just thinking about the way you said something small<br>
+          and it stayed with me for hours.<br>
+          I don't tell you everything I think about you,<br>
+          because some of it doesn't fit into words yet,<br>
+          it's more like a feeling that grew quietly<br>
+          while I wasn't paying attention,<br>
+          until one day it was just there, steady,<br>
+          the way the moon is there even when you forget to look up.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">🕊️</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          I've never been someone who feels settled easily,<br>
+          my mind is usually somewhere else, restless,<br>
+          looking for the next thing to worry about.<br>
+          But with you it's different.<br>
+          There's a kind of quiet that comes over me,<br>
+          not empty, just calm, like I finally stopped bracing<br>
+          for something to go wrong.<br>
+          You didn't fix anything in me,<br>
+          you just made it easier to breathe,<br>
+          and honestly, that might be the biggest thing anyone's done.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">✨</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          I keep noticing small things about you,<br>
+          the way you laugh before the joke even finishes,<br>
+          the way you get quiet when you're actually paying attention,<br>
+          the way you say my name differently than everyone else does.<br>
+          None of it is dramatic, none of it would make a good story,<br>
+          but all of it, together, is the reason I keep choosing<br>
+          to stay close to you instead of anywhere else.<br>
+          I think that's what falling for someone actually looks like,<br>
+          not one big moment, just a hundred small ones you don't forget.
+        </p>
+      </div>
+    </div>
+
+    <div class="eye-box">
+      <span class="eye-icon">🍂</span>
+      <p class="eye-hint">hover</p>
+      <div class="eye-poem">
+        <p>
+          I'm not good at pretending things don't matter to me,<br>
+          so I won't pretend about this.<br>
+          You matter. More than I probably show most days.<br>
+          I think about the version of my life before you<br>
+          and it feels quieter in a way I didn't notice back then,<br>
+          like something was missing and I just hadn't named it yet.<br>
+          Now I know what it was.<br>
+          It was this. It was you, showing up,<br>
+          and staying, even when I didn't ask you to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rose-garden">
+    <p class="garden-title">حديقة القلب</p>
+    <div class="rose-grid">
+
+      <div class="rose-item">
+        <span class="r-icon">🌹</span>
+        <div class="r-poem"><p>وردة لكل مرة بغيتيني نبقى، وكل مرة حسيت فيها بالأمان معاك.</p></div>
+      </div>
+
+      <div class="rose-item">
+        <span class="r-icon">🕊️</span>
+        <div class="r-poem"><p>سلام لقلبي كل ما بانت ضحكتك، هدنة صغيرة وسط الدنيا كلها.</p></div>
+      </div>
+
+      <div class="rose-item">
+        <span class="r-icon">💌</span>
+        <div class="r-poem"><p>رسالة ما تبعتاتش، بقات محفوظة فقلبي، كتقولك بلا ما تهدر: راكِ غالية.</p></div>
+      </div>
+
+      <div class="rose-item">
+        <span class="r-icon">🌙</span>
+        <div class="r-poem"><p>كل ليلة كنكري فيها اسمك قبل ما نعس، بحال دعوة صغيرة ما بغيتش تخلص.</p></div>
+      </div>
+
+      <div class="rose-item">
+        <span class="r-icon">✨</span>
+        <div class="r-poem"><p>نجمة زايدة ف سماي، من نهار دخلتي فحياتي وبدلتي ليا الضو.</p></div>
+      </div>
+
+      <div class="rose-item">
+        <span class="r-icon">🍂</span>
+        <div class="r-poem"><p>الوقت اللي فات معاك، حتى لحظة منو ما ندمت عليها، كلها كانت تستاهل.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="closing">
+    <p class="to">هاد الكلام كامل موجه لـ</p>
+    <div class="name-box">
+      <div class="name-slot">❀ إكرام ❀</div>
+      <p class="name-hint">hover</p>
+      <div class="name-poem">
+        <p>
+          إكرام، اسمك وحدو كافي باش يبدل نهاري،<br>
+          كل حاجة زوينة فحياتي، صرت نربطها بيك،<br>
+          ما كنبغيكيش بس، كنشكر اللحظة اللي جبتيني ليك.
+        </p>
+      </div>
+    </div>
+    <div class="signature">💌 🌹 ✨</div>
+  </section>
+
+</body>
+</html>
